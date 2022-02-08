@@ -1,11 +1,6 @@
 import React, {useState} from "react";
 
-function NewPlantForm({onAddPlant}) {
-  const [formData, setFormData] = useState({
-    name: '',
-    image: '',
-    price: 0
-  })
+function NewPlantForm({onAddPlant, formData, setFormData}) {
 
   function handleFormChange(e){
     let changeType = e.target.name

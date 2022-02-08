@@ -27,10 +27,17 @@ function handleAddPlant(newPlant){
   })
 }
 
+function onDeletePlant(plant){
+  fetch(`http://localhost:6001/plants/${plant.id}`, {
+    method: 'DELETE'
+  })
+  .then(setPlants(plants => [...plants].filter(elem => elem.id !== plant.id)))
+}
+
   return (
     <div className="app">
       <Header />
-      <PlantPage plants={plants} onAddPlant={handleAddPlant}/>
+      <PlantPage plants={plants} onAddPlant={handleAddPlant} handleDeletePlant={onDeletePlant}/>
     </div>
   );
 }
