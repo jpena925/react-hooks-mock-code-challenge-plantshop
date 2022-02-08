@@ -11,15 +11,12 @@ function PlantPage({plants, onAddPlant, handleUpdatePrice, handleDeletePlant}) {
     price: 0
   })
 
-  function onUpdatePrice(plant){
-    handleDeletePlant(plant)
-    setFormData(formData => plant)
-  }
+
   return (
     <main>
       <NewPlantForm onAddPlant={onAddPlant} formData={formData} setFormData={setFormData}/>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-      <PlantList plants={plants} searchTerm={searchTerm} handleUpdatePrice={onUpdatePrice} deletePlant={handleDeletePlant}/>
+      <PlantList plants={plants} searchTerm={searchTerm} handleUpdatePrice={handleUpdatePrice} deletePlant={handleDeletePlant}/>
     </main>
   );
 }

@@ -14,6 +14,7 @@ function App() {
   }, [])
 
 function handleAddPlant(newPlant){
+
   fetch(URL, {
     method: 'POST',
     headers: {
@@ -34,10 +35,24 @@ function onDeletePlant(plant){
   .then(setPlants(plants => [...plants].filter(elem => elem.id !== plant.id)))
 }
 
+function updateThatPrice(plant, value){
+  console.log(plant.id)
+  fetch(`http://localhost:6001/plants/${plant.id}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({...plant, price: value})
+  })
+  .then(res => res.json())
+  .then(data => {
+    setPlants((plants) => [...plants].map(elem=> elem.id === data.id ? data : elem))
+  })
+}
   return (
     <div className="app">
       <Header />
-      <PlantPage plants={plants} onAddPlant={handleAddPlant} handleDeletePlant={onDeletePlant}/>
+      <PlantPage plants={plants} onAddPlant={handleAddPlant} handleDeletePlant={onDeletePlant} handleUpdatePrice={updateThatPrice}/>
     </div>
   );
 }
